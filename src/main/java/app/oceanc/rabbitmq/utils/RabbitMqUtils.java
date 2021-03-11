@@ -15,6 +15,23 @@ import java.util.concurrent.TimeoutException;
  * @Version 1.0
  */
 public class RabbitMqUtils {
+    private static ConnectionFactory connectionFactory;
+
+    static {
+        connectionFactory = new ConnectionFactory();
+        //重量级资源没必要使用一次创建一次,类加载执行只执行一次
+        //设置连接主机
+        connectionFactory.setHost("43.128.2.172");
+        //设置端口
+        connectionFactory.setPort(5777);
+        //设置虚拟主机名
+        connectionFactory.setVirtualHost("ems");
+        //设置访问虚拟主机名
+        connectionFactory.setUsername("ems");
+        //设置访问虚拟主机端口
+        connectionFactory.setPassword("123");
+    }
+
     /**
      * 获取连接
      *
@@ -22,18 +39,7 @@ public class RabbitMqUtils {
      */
     public static Connection getConnection() {
         try {
-            //创建连接工厂对象
-            ConnectionFactory connectionFactory = new ConnectionFactory();
-            //设置连接主机
-            connectionFactory.setHost("43.128.2.172");
-            //设置端口
-            connectionFactory.setPort(5777);
-            //设置虚拟主机名
-            connectionFactory.setVirtualHost("ems");
-            //设置访问虚拟主机名
-            connectionFactory.setUsername("ems");
-            //设置访问虚拟主机端口
-            connectionFactory.setPassword("123");
+
             return connectionFactory.newConnection();
         } catch (IOException e) {
             e.printStackTrace();
