@@ -39,7 +39,7 @@ public class Provider {
         //参数3: exclusive是否独占队列 true 独占队列 false 不独占
         //参数4: autoDelete: 是否在消费完成后自动删除队列, true 自动删除 false 不自动删除
         //参数5: 额外附加参数
-        channel.queueDeclare("aa", true, false, false, null);
+        channel.queueDeclare("aa", true, false, true, null);
 
         //发布消息
         //参数1: 交换机名称
