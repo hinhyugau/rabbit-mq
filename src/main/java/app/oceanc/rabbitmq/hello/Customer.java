@@ -1,5 +1,6 @@
 package app.oceanc.rabbitmq.hello;
 
+import app.oceanc.rabbitmq.utils.RabbitMqUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -13,14 +14,14 @@ import java.util.concurrent.TimeoutException;
  */
 public class Customer {
     public static void main(String[] args) throws IOException, TimeoutException {
-        ConnectionFactory connectionFactory = new ConnectionFactory();
+        /*ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("43.128.2.172");
         connectionFactory.setPort(5777);
         connectionFactory.setVirtualHost("ems");
         connectionFactory.setUsername("ems");
-        connectionFactory.setPassword("123");
+        connectionFactory.setPassword("123");*/
 
-        Connection connection = connectionFactory.newConnection();
+        Connection connection = RabbitMqUtils.getConnection();
 
         Channel channel = connection.createChannel();
         //通道绑定对应详细队列

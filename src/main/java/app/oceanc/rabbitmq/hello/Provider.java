@@ -1,8 +1,8 @@
 package app.oceanc.rabbitmq.hello;
 
+import app.oceanc.rabbitmq.utils.RabbitMqUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class Provider {
     public static void main(String[] args) throws IOException, TimeoutException {
-        //创建连接mq的连接工厂对象
+        /*//创建连接mq的连接工厂对象
         ConnectionFactory connectionFactory = new ConnectionFactory();
         //设置rabbitmq主机
         connectionFactory.setHost("43.128.2.172");
@@ -25,10 +25,10 @@ public class Provider {
         connectionFactory.setVirtualHost("ems");
         //设置访问虚拟主机的账号密码
         connectionFactory.setUsername("ems");
-        connectionFactory.setPassword("123");
+        connectionFactory.setPassword("123");*/
 
         //获取连接对象
-        Connection connection = connectionFactory.newConnection();
+        Connection connection = RabbitMqUtils.getConnection();
 
         //获取连接冲的通道
         Channel channel = connection.createChannel();
@@ -45,8 +45,7 @@ public class Provider {
         //参数2: 队列名称
         //参数3: 传递消息额外设置
         //参数4: 消息的具体内容
-        channel.basicPublish("", "hello", null, "是的呢啊啊啊".getBytes());
-        channel.close();
-        connection.close();
+        channel.basicPublish("", "hello", null, "发个消息".getBytes());
+        RabbitMqUtils.closeChannelAndConn(channel, connection);
     }
 }
